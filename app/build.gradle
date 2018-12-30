@@ -20,9 +20,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            resValue "string", "API_BASE_URL", '"http://5b840ba5db24a100142dcd8c.mockapi.io/api"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "API_BASE_URL", '"http://5b840ba5db24a100142dcd8c.mockapi.io/api"'
         }
     }
 }
@@ -48,6 +52,9 @@ dependencies {
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //Rx
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
 
     //Test
     testImplementation 'junit:junit:4.12'
