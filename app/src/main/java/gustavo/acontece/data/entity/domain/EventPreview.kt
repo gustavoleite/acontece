@@ -2,7 +2,7 @@ package gustavo.acontece.data.entity.domain
 
 import java.util.*
 
-data class Ceremony (
+data class EventPreview (
     val id: String,
     val title: String,
     val image: String,

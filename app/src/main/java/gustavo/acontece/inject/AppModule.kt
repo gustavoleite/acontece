@@ -5,7 +5,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import gustavo.acontece.R
-import gustavo.acontece.data.api.CerimonyApi
+import gustavo.acontece.data.api.EventApi
 import gustavo.acontece.util.resourceprovider.ResourceProvider
 import gustavo.acontece.util.resourceprovider.ResourceProviderImpl
 import retrofit2.Retrofit
@@ -45,7 +45,7 @@ class AppModule(val application: Application) {
 
     @Provides
     @Singleton
-    fun provideCerimonyApi(retrofit: Retrofit): CerimonyApi {
-        return retrofit.create<CerimonyApi>(CerimonyApi::class.java)
+    fun provideCerimonyApi(retrofit: Retrofit): EventApi {
+        return retrofit.create<EventApi>(EventApi::class.java)
     }
 }
