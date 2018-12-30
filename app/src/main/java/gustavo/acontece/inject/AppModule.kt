@@ -5,7 +5,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import gustavo.acontece.R
-import gustavo.acontece.data.api.EventsApi
+import gustavo.acontece.data.api.EventApi
 import gustavo.acontece.data.repository.EventRepositoryImpl
 import gustavo.acontece.utils.resource.ResourceProvider
 import gustavo.acontece.utils.resource.ResourceProviderImpl
@@ -54,13 +54,13 @@ class AppModule(val application: Application) {
 
     @Provides
     @Singleton
-    fun provideEventApi(retrofit: Retrofit): EventsApi {
-        return retrofit.create<EventsApi>(EventsApi::class.java)
+    fun provideEventApi(retrofit: Retrofit): EventApi {
+        return retrofit.create<EventApi>(EventApi::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideEventRepositoryImpl(eventsApi: EventsApi): EventRepositoryImpl {
-        return EventRepositoryImpl(eventsApi)
+    fun provideEventRepositoryImpl(eventApi: EventApi): EventRepositoryImpl {
+        return EventRepositoryImpl(eventApi)
     }
 }

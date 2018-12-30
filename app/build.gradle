@@ -31,8 +31,12 @@ android {
     }
 }
 
+ext {
+    retrofit_version = '2.4.0'
+    dagger_version = '2.18'
+}
+
 dependencies {
-    def dagger_version = 2.18
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -50,10 +54,10 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-    //Retrofix requests interceptor
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    //Retrofit requests interceptor
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
     //Rx
