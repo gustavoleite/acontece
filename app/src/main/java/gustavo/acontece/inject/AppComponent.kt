@@ -2,7 +2,7 @@ package gustavo.acontece.inject
 
 import android.app.Application
 import dagger.Component
-import gustavo.acontece.ui.HomeActivity
+import gustavo.acontece.ui.home.HomeActivity
 import javax.inject.Singleton
 
 @Singleton

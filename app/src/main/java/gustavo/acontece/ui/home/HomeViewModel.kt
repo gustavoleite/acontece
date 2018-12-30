@@ -1,4 +1,4 @@
-package gustavo.acontece.ui
+package gustavo.acontece.ui.home
 
 import android.arch.lifecycle.ViewModel
 import javax.inject.Inject
