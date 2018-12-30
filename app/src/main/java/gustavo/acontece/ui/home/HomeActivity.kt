@@ -20,15 +20,14 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         MainApplication.appComponent.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
         setupBinding()
+        viewModel.loadData()
     }
 
     private fun setupBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.viewModel = viewModel
     }
-
 }

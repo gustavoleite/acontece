@@ -1,4 +1,4 @@
-package gustavo.acontece.data.output
+package gustavo.acontece.data.entity.output
 
 import com.google.gson.annotations.SerializedName
 
