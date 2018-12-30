@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 class RetrofitInstance {
-    companion object {
+ /*   companion object {
         fun get(resourceProvider: ResourceProvider): Retrofit {
             return retrofit2
                 .Retrofit
@@ -16,5 +16,5 @@ class RetrofitInstance {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
-    }
+    }*/
 }

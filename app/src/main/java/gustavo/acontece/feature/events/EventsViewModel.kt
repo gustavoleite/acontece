@@ -1,7 +1,7 @@
 package gustavo.acontece.feature.events
 
 import android.arch.lifecycle.ViewModel
-import gustavo.acontece.data.domain.Ceremony
+import gustavo.acontece.data.entity.domain.Ceremony
 
 class EventsViewModel : ViewModel() {
 

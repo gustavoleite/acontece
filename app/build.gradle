@@ -15,10 +15,17 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+
+        debug {
+            resValue "string", "API_BASE_URL", '"http://5b840ba5db24a100142dcd8c.mockapi.io/api"'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "API_BASE_URL", '"http://5b840ba5db24a100142dcd8c.mockapi.io/api"'
         }
+
     }
 }
 
@@ -36,6 +43,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testCompile "org.mockito:mockito-core:2.23.4"
 
     //Rx
     implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
@@ -45,4 +53,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //RetrofitInstance
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 }

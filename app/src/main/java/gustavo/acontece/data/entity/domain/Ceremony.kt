@@ -1,4 +1,4 @@
-package gustavo.acontece.data.domain
+package gustavo.acontece.data.entity.domain
 
 import java.util.*
 
