@@ -6,8 +6,8 @@ import dagger.Module
 import dagger.Provides
 import gustavo.acontece.R
 import gustavo.acontece.data.api.EventApi
-import gustavo.acontece.util.resourceprovider.ResourceProvider
-import gustavo.acontece.util.resourceprovider.ResourceProviderImpl
+import gustavo.acontece.utils.resourceprovider.ResourceProvider
+import gustavo.acontece.utils.resourceprovider.ResourceProviderImpl
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -45,7 +45,7 @@ class AppModule(val application: Application) {
 
     @Provides
     @Singleton
-    fun provideCerimonyApi(retrofit: Retrofit): EventApi {
+    fun provideEventApi(retrofit: Retrofit): EventApi {
         return retrofit.create<EventApi>(EventApi::class.java)
     }
 }

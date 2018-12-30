@@ -1,4 +1,4 @@
-package gustavo.acontece.util.resourceprovider
+package gustavo.acontece.utils.resourceprovider
 
 interface ResourceProvider {
     fun getString(resourceId: Int) : String

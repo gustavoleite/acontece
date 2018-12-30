@@ -1,4 +1,4 @@
-package gustavo.acontece.util.resourceprovider
+package gustavo.acontece.utils.resourceprovider
 
 import android.content.Context
 
