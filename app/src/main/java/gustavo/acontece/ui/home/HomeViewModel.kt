@@ -10,7 +10,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(private val eventRepository: EventRepositoryImpl): BaseViewModel() {
+class HomeViewModel @Inject constructor(val eventRepository: EventRepositoryImpl): BaseViewModel() {
 
     val eventPreviewList = MutableLiveData<List<EventPreview>>()
 
