@@ -16,11 +16,8 @@ class EventsListAdapter @Inject constructor() : RecyclerView.Adapter<EventsListA
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
         val binding = holder.binding
-        val eventPreview = events[position]
-
-        val viewModel = EventsListViewModel(eventPreview)
+        val viewModel = EventsListViewModel(events[position])
         binding.viewModel = viewModel
-
         holder.setClickListener(itemClick)
     }
 
