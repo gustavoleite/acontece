@@ -9,7 +9,7 @@ import gustavo.acontece.data.entity.model.EventPreview
 import gustavo.acontece.databinding.EventItemBinding
 import javax.inject.Inject
 
-class EventsAdapter @Inject constructor() : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
+class EventsListAdapter @Inject constructor() : RecyclerView.Adapter<EventsListAdapter.EventsViewHolder>() {
 
     private var events: List<EventPreview> = emptyList()
     private var itemClick: ((EventPreview) -> Unit)? = null
@@ -18,7 +18,7 @@ class EventsAdapter @Inject constructor() : RecyclerView.Adapter<EventsAdapter.E
         val binding = holder.binding
         val eventPreview = events[position]
 
-        val viewModel = EventsViewModel(eventPreview)
+        val viewModel = EventsListViewModel(eventPreview)
         binding.viewModel = viewModel
 
         holder.setClickListener(itemClick)

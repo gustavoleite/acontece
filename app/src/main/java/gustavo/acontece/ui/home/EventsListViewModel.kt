@@ -5,16 +5,16 @@ import gustavo.acontece.data.entity.model.EventPreview
 import gustavo.acontece.utils.extensions.toBrCurrency
 import gustavo.acontece.utils.extensions.toDayMonthYear
 
-class EventsViewModel(val eventPreview: EventPreview) : ViewModel() {
+class EventsListViewModel(private val eventPreview: EventPreview) : ViewModel() {
 
     val image = eventPreview.image
     val title = eventPreview.title
     val price = eventPreview.price.toBrCurrency()
     val date = eventPreview.date.toDayMonthYear()
 
-    lateinit var onItemPressedCallback: (EventPreview)-> Unit
+    var onItemPressedCallback: ((EventPreview) -> Unit)? = null
 
     fun onItemPressed() {
-        onItemPressedCallback(eventPreview)
+        onItemPressedCallback?.invoke(eventPreview)
     }
 }

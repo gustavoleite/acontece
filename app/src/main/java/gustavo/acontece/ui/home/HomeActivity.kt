@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var adapter: EventsAdapter
+    lateinit var listAdapter: EventsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +40,13 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupAdapter() {
         binding.homeRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.homeRecyclerView.adapter = adapter
+        binding.homeRecyclerView.adapter = listAdapter
     }
 
     private fun setupObservers(viewModel: HomeViewModel) {
         viewModel.eventPreviewList.observe(this, Observer {
             it?.let {
-                adapter.setEventPreviewList(it)
+                listAdapter.setEventPreviewList(it)
             }
         })
     }
