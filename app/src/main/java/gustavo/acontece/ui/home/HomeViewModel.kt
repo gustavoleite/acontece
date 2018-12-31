@@ -13,17 +13,20 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(val eventRepository: EventRepositoryImpl): BaseViewModel() {
 
     val eventPreviewList = MutableLiveData<List<EventPreview>>()
+    val loaderVisibility = MutableLiveData<Boolean>()
 
     fun loadData() {
+        loaderVisibility.value = true
         eventRepository
             .fetchEvents()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy (
                 onError = {
-                    //eventPreviewList.value = it
+                    loaderVisibility.value = false
                 },
                 onSuccess = {
+                    loaderVisibility.value = false
                     eventPreviewList.value = it
                 }
             )

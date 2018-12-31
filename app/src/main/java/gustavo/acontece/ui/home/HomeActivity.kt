@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import gustavo.acontece.MainApplication
@@ -32,13 +33,17 @@ class HomeActivity : AppCompatActivity() {
         viewModel.loadData()
     }
 
-    private fun provideViewModel() : HomeViewModel {
+    private fun provideViewModel(): HomeViewModel {
         return ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
     }
 
     private fun setupBinding(viewModel: HomeViewModel) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.viewModel = viewModel
+        binding.homeSwipeRefreshLayout.apply {
+            setOnRefreshListener { viewModel.loadData() }
+            setColorSchemeColors(ContextCompat.getColor(this@HomeActivity, R.color.secondaryColor))
+        }
     }
 
     private fun setupAdapter() {
@@ -49,10 +54,17 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupObservers(viewModel: HomeViewModel) {
-        viewModel.eventPreviewList.observe(this, Observer {
-            it?.let {
-                listAdapter.setEventPreviewList(it)
-            }
-        })
+        with(viewModel) {
+            eventPreviewList.observe(this@HomeActivity, Observer {
+                it?.let {
+                    listAdapter.setEventPreviewList(it)
+                }
+            })
+            loaderVisibility.observe(this@HomeActivity, Observer {
+                it?.let {
+                    binding.homeSwipeRefreshLayout.isRefreshing = it
+                }
+            })
+        }
     }
 }
