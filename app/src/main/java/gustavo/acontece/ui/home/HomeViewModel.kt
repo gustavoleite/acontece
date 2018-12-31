@@ -1,7 +1,8 @@
 package gustavo.acontece.ui.home
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
+import gustavo.acontece.data.entity.model.EventPreview
 import gustavo.acontece.data.repository.EventRepositoryImpl
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(val eventRepository: EventRepositoryImpl): ViewModel() {
 
-    val title = ObservableField<String>("Ola mundo")
+    val eventPreviewList = MutableLiveData<List<EventPreview>>()
     var compositeDisposable = CompositeDisposable()
 
     fun loadData() {
@@ -22,9 +23,11 @@ class HomeViewModel @Inject constructor(val eventRepository: EventRepositoryImpl
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy (
                 onError = {
-                    title.set("Ocorreu um erro na request")
+                    //eventPreviewList.value = it
                 },
-                onSuccess = { title.set(it[0].title)}
+                onSuccess = {
+                    eventPreviewList.value = it
+                }
             )
             .addTo(compositeDisposable)
     }
