@@ -2,14 +2,15 @@ package gustavo.acontece.ui.home
 
 import android.arch.lifecycle.ViewModel
 import gustavo.acontece.data.entity.model.EventPreview
-import java.util.*
+import gustavo.acontece.utils.extensions.toBrCurrency
+import gustavo.acontece.utils.extensions.toDayMonthYear
 
 class EventsViewModel(val eventPreview: EventPreview) : ViewModel() {
 
     val image = eventPreview.image
     val title = eventPreview.title
-    val price = eventPreview.price.toString()
-    val date = eventPreview.date.get(Calendar.DAY_OF_MONTH).toString()
+    val price = eventPreview.price.toBrCurrency()
+    val date = eventPreview.date.toDayMonthYear()
 
     lateinit var onItemPressedCallback: (EventPreview)-> Unit
 
