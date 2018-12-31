@@ -14,33 +14,38 @@ import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var viewModel: HomeViewModel
-    lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var listAdapter: EventsListAdapter
+    private lateinit var listAdapter: EventsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainApplication.appComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
-        setupBinding()
+        val viewModel = provideViewModel()
+        setupBinding(viewModel)
         setupAdapter()
         setupObservers(viewModel)
         viewModel.loadData()
     }
 
-    private fun setupBinding() {
+    private fun provideViewModel() : HomeViewModel {
+        return ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+    }
+
+    private fun setupBinding(viewModel: HomeViewModel) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.viewModel = viewModel
     }
 
     private fun setupAdapter() {
-        binding.homeRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.homeRecyclerView.adapter = listAdapter
+        with(binding.homeRecyclerView) {
+            layoutManager = LinearLayoutManager(this@HomeActivity)
+            adapter = listAdapter
+        }
     }
 
     private fun setupObservers(viewModel: HomeViewModel) {
