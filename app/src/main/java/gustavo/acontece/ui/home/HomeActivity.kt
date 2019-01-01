@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import com.airbnb.lottie.LottieDrawable
 import gustavo.acontece.MainApplication
 import gustavo.acontece.R
 import gustavo.acontece.databinding.ActivityHomeBinding
@@ -65,6 +67,27 @@ class HomeActivity : AppCompatActivity() {
                     binding.homeSwipeRefreshLayout.isRefreshing = it
                 }
             })
+            errorMessage.observe(this@HomeActivity, Observer {
+                binding.homeFaceAnimation.repeatCount = LottieDrawable.INFINITE
+                if (it.isNullOrBlank()) {
+                    hideNetworkingInfo()
+                } else if (!binding.homeFaceAnimation.isAnimating) {
+                    showNetworkingInfo(it)
+                }
+            })
         }
+    }
+
+    private fun showNetworkingInfo(it: String?) {
+        listAdapter.setEventPreviewList(emptyList())
+        binding.homeMessageTextView.text = it
+        binding.homeFaceAnimation.playAnimation()
+        binding.homeFaceAnimation.visibility = View.VISIBLE
+    }
+
+    private fun hideNetworkingInfo() {
+        binding.homeMessageTextView.text = null+
+        binding.homeFaceAnimation.pauseAnimation()
+        binding.homeFaceAnimation.visibility = View.GONE
     }
 }
