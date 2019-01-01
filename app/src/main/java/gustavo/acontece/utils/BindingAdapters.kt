@@ -1,6 +1,7 @@
 package gustavo.acontece.utils
 
 import android.databinding.BindingAdapter
+import android.databinding.ObservableField
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
 
@@ -13,6 +14,17 @@ object BindingAdapters {
             .get()
             .load(imageUrl)
             .into(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("observableImageUrl")
+    fun loadImage(view: ImageView, imageUrl: ObservableField<String>) {
+        if (!imageUrl.get().isNullOrBlank()) {
+            Picasso
+                .get()
+                .load(imageUrl.get())
+                .into(view)
+        }
     }
 
     @JvmStatic

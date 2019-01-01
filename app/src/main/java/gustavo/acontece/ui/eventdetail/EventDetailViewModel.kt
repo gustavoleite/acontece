@@ -1,6 +1,7 @@
 package gustavo.acontece.ui.eventdetail
 
 import android.arch.lifecycle.MutableLiveData
+import android.databinding.ObservableField
 import gustavo.acontece.R
 import gustavo.acontece.data.entity.model.Event
 import gustavo.acontece.data.repository.EventRepositoryImpl
@@ -18,6 +19,9 @@ class EventDetailViewModel  @Inject constructor(val eventRepository: EventReposi
     val loaderVisibility = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
 
+    val image = ObservableField<String>()
+    val description = ObservableField<String>()
+
     fun loadData(eventId: String) {
         loaderVisibility.value = true
         eventRepository
@@ -26,15 +30,25 @@ class EventDetailViewModel  @Inject constructor(val eventRepository: EventReposi
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy (
                 onError = {
-                    loaderVisibility.value = false
-                    errorMessage.value = resourceProvider.getString(R.string.events_list_error)
+                    setStateError()
                 },
                 onSuccess = {
-                    loaderVisibility.value = false
-                    event.value = it
-                    errorMessage.value = null
+                    setData(it)
                 }
             )
             .addTo(compositeDisposable)
+    }
+
+    private fun setData(it: Event?) {
+        loaderVisibility.value = false
+        errorMessage.value = null
+        event.value = it
+        description.set(it?.description)
+        image.set(it?.image)
+    }
+
+    private fun setStateError() {
+        loaderVisibility.value = false
+        errorMessage.value = resourceProvider.getString(R.string.events_list_error)
     }
 }
