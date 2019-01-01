@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Acontece</string>
+
+    <string name="events_list_error">Ops, algo deu errado!</string>
 </resources>

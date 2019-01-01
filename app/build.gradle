@@ -73,6 +73,9 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //Lottie animations
+    implementation 'com.airbnb.android:lottie:2.7.0'
+
     //Test
     testImplementation 'junit:junit:4.12'
     testImplementation 'io.mockk:mockk:1.8.13.kotlin13'
