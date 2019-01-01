@@ -3,6 +3,7 @@ package gustavo.acontece.ui.home
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -13,6 +14,7 @@ import com.airbnb.lottie.LottieDrawable
 import gustavo.acontece.MainApplication
 import gustavo.acontece.R
 import gustavo.acontece.databinding.ActivityHomeBinding
+import gustavo.acontece.ui.eventdetail.EventDetailActivity
 import javax.inject.Inject
 
 class HomeActivity : AppCompatActivity() {
@@ -49,6 +51,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupAdapter() {
+        listAdapter.setClickListener { it ->
+            startActivity(EventDetailActivity.newInstance(Intent(this, EventDetailActivity::class.java), it.id))
+        }
         with(binding.homeRecyclerView) {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             adapter = listAdapter

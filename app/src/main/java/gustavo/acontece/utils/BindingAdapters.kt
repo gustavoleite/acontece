@@ -14,4 +14,16 @@ object BindingAdapters {
             .load(imageUrl)
             .into(view)
     }
+
+    @JvmStatic
+    @BindingAdapter("circleImageUrl")
+    fun loadImageCircle(view: ImageView, imageUrl: String) {
+        Picasso
+            .get()
+            .load(imageUrl)
+            .fit()
+            .centerCrop()
+            .transform(CircleTransform())
+            .into(view)
+    }
 }
