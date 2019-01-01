@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -39,6 +40,7 @@ class EventDetailActivity : AppCompatActivity() {
         setupToolbar()
         setupAdapter()
         setupObservers(viewModel)
+        setupMap()
         viewModel.loadData(intent.extras?.getString(EVENT_DETAIL_ARG) ?: throw Exception())
     }
 
@@ -70,7 +72,7 @@ class EventDetailActivity : AppCompatActivity() {
                 it?.let { it ->
                     binding.toolbar.title = it.title
                     listAdapter.setPeopleList(it.peoples)
-                    setupMap(it.location)
+                    setMapLocation(it.location)
                 }
             })
             /*loaderVisibility.observe(this@EventDetailActivity, Observer {
@@ -89,21 +91,24 @@ class EventDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupMap(location: Location) {
-        with(event_detail_map as SupportMapFragmentWrapper) {
-            getMapAsync {
-                val cameraPosition = CameraPosition.Builder()
-                    .target(LatLng(location.latitude, location.longitude))
-                    .zoom(14.3f)
-                    .build()
-                it.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-                it.addMarker(MarkerOptions().position(LatLng(location.latitude, location.longitude)))
-            }
-            setListener(object : SupportMapFragmentWrapper.OnTouchListener {
+    private fun setupMap() {
+        (event_detail_map as SupportMapFragmentWrapper).setListener(
+            object : SupportMapFragmentWrapper.OnTouchListener {
                 override fun onTouch() {
                     event_detail_nested_scroll_view.requestDisallowInterceptTouchEvent(true)
                 }
-            })
+            }
+        )
+    }
+
+    private fun setMapLocation(location: Location) {
+        (event_detail_map as SupportMapFragment).getMapAsync {
+            val cameraPosition = CameraPosition.Builder()
+                .target(LatLng(location.latitude, location.longitude))
+                .zoom(14.3f)
+                .build()
+            it.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+            it.addMarker(MarkerOptions().position(LatLng(location.latitude, location.longitude)))
         }
     }
 
