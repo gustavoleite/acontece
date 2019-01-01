@@ -24,15 +24,15 @@ object EventMapper {
                 price,
                 date.toCalendar(),
                 description,
-                toLocation(latitude, longitude),
+                toLocation(latitude, longitude, title),
                 toPeopleList(peopleList),
                 toCuponList(cuponList)
             )
         }
     }
 
-    private fun toLocation(latitude: String, longitude: String) : Location {
-        return Location(latitude.toDouble(), longitude.toDouble())
+    private fun toLocation(latitude: String, longitude: String, title: String) : Location {
+        return Location(latitude.toDouble(), longitude.toDouble(), title)
     }
 
     private fun toPeopleList(peopleOutputList: List<PeopleOutput>) : List<People> {

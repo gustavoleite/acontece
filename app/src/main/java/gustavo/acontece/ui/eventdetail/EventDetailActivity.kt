@@ -37,7 +37,6 @@ class EventDetailActivity : AppCompatActivity() {
         MainApplication.appComponent.inject(this)
         val viewModel = provideViewModel()
         setupBinding(viewModel)
-        setupToolbar()
         setupAdapter()
         setupObservers(viewModel)
         setupMap()
@@ -46,11 +45,6 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun provideViewModel(): EventDetailViewModel {
         return ViewModelProviders.of(this, viewModelFactory).get(EventDetailViewModel::class.java)
-    }
-
-    private fun setupToolbar() {
-        binding.toolbar.title = ""
-        setSupportActionBar(binding.toolbar)
     }
 
     private fun setupBinding(viewModel: EventDetailViewModel) {
@@ -75,19 +69,6 @@ class EventDetailActivity : AppCompatActivity() {
                     setMapLocation(it.location)
                 }
             })
-            /*loaderVisibility.observe(this@EventDetailActivity, Observer {
-                it?.let {
-                    binding.homeSwipeRefreshLayout.isRefreshing = it
-                }
-            })
-            errorMessage.observe(this@EventDetailActivity, Observer {
-                binding.homeFaceAnimation.repeatCount = LottieDrawable.INFINITE
-                if (it.isNullOrBlank()) {
-                    hideNetworkingInfo()
-                } else if (!binding.homeFaceAnimation.isAnimating) {
-                    showNetworkingInfo(it)
-                }
-            })*/
         }
     }
 
@@ -108,26 +89,17 @@ class EventDetailActivity : AppCompatActivity() {
                 .zoom(14.3f)
                 .build()
             it.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-            it.addMarker(MarkerOptions().position(LatLng(location.latitude, location.longitude)))
+            it.addMarker(
+                MarkerOptions()
+                    .position(LatLng(location.latitude, location.longitude))
+                    .title(location.title)
+            )
         }
     }
 
-    /*private fun showNetworkingInfo(it: String?) {
-        listAdapter.setEventPreviewList(emptyList())
-        binding.homeMessageTextView.text = it
-        binding.homeFaceAnimation.playAnimation()
-        binding.homeFaceAnimation.visibility = View.VISIBLE
-    }
-
-    private fun hideNetworkingInfo() {
-        binding.homeMessageTextView.text = null
-        binding.homeFaceAnimation.pauseAnimation()
-        binding.homeFaceAnimation.visibility = View.GONE
-    }*/
-
     companion object {
 
-        private val EVENT_DETAIL_ARG = "EVENT_DETAIL_ARG"
+        private const val EVENT_DETAIL_ARG = "EVENT_DETAIL_ARG"
 
         fun newInstance(intent: Intent, eventId: String): Intent {
             return intent.apply {
