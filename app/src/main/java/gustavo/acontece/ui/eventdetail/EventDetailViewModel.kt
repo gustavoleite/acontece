@@ -22,6 +22,8 @@ class EventDetailViewModel  @Inject constructor(val eventRepository: EventReposi
     val image = ObservableField<String>()
     val description = ObservableField<String>()
 
+    val peopleSectionTitle = resourceProvider.getString(R.string.events_detail_organizers)
+
     fun loadData(eventId: String) {
         loaderVisibility.value = true
         eventRepository

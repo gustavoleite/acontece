@@ -40,7 +40,8 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        app:layout_collapseMode="pin"/>
+                        app:layout_collapseMode="pin"
+                        app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -56,6 +57,7 @@
                     android:layout_height="wrap_content">
 
                 <TextView
+                        android:id="@+id/event_detail_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
@@ -63,19 +65,31 @@
                         android:layout_marginEnd="12dp"
                         android:text="@{viewModel.description}"
                         android:textSize="16dp"
-                        android:id="@+id/event_detail_description"
                         android:lineSpacingExtra="4dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         tools:text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"/>
 
+                <TextView
+                        android:id="@+id/event_detail_people_section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginStart="16dp"
+                        android:text="@{viewModel.peopleSectionTitle}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="ORGANIZADORES:"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/event_detail_description"/>
+
                 <android.support.v7.widget.RecyclerView
                         android:id="@+id/event_detail_recycler_view"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="16dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layout_constraintTop_toBottomOf="@+id/event_detail_description"/>
+                        app:layout_constraintTop_toBottomOf="@+id/event_detail_people_section"/>
 
             </android.support.constraint.ConstraintLayout>
 

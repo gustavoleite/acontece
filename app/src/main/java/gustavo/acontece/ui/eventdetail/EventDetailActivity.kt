@@ -28,6 +28,7 @@ class EventDetailActivity : AppCompatActivity() {
         MainApplication.appComponent.inject(this)
         val viewModel = provideViewModel()
         setupBinding(viewModel)
+        setupToolbar()
         setupAdapter()
         setupObservers(viewModel)
         viewModel.loadData(intent.extras?.getString(EVENT_DETAIL_ARG) ?: throw Exception())
@@ -35,6 +36,11 @@ class EventDetailActivity : AppCompatActivity() {
 
     private fun provideViewModel(): EventDetailViewModel {
         return ViewModelProviders.of(this, viewModelFactory).get(EventDetailViewModel::class.java)
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.title = ""
+        setSupportActionBar(binding.toolbar)
     }
 
     private fun setupBinding(viewModel: EventDetailViewModel) {
@@ -53,6 +59,7 @@ class EventDetailActivity : AppCompatActivity() {
         with(viewModel) {
             event.observe(this@EventDetailActivity, Observer {
                 it?.let {
+                    binding.toolbar.title = it.title
                     listAdapter.setPeopleList(it.peoples)
                 }
             })
