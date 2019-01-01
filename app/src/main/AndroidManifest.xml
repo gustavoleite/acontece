@@ -22,6 +22,11 @@
         <activity
                 android:name=".ui.eventdetail.EventDetailActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
+
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/GOOGLE_MAPS_KEY" />
+
     </application>
 
 </manifest>
