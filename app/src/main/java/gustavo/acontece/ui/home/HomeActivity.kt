@@ -86,7 +86,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun hideNetworkingInfo() {
-        binding.homeMessageTextView.text = null+
+        binding.homeMessageTextView.text = null
         binding.homeFaceAnimation.pauseAnimation()
         binding.homeFaceAnimation.visibility = View.GONE
     }
