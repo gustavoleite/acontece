@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import gustavo.acontece.R
 import gustavo.acontece.data.entity.model.EventPreview
-import gustavo.acontece.databinding.EventItemBinding
+import gustavo.acontece.databinding.ItemEventBinding
 import javax.inject.Inject
 
 class EventsListAdapter @Inject constructor() : RecyclerView.Adapter<EventsListAdapter.EventsViewHolder>() {
@@ -24,9 +24,9 @@ class EventsListAdapter @Inject constructor() : RecyclerView.Adapter<EventsListA
     override fun getItemCount(): Int = events.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
-        val binding = DataBindingUtil.inflate<EventItemBinding>(
+        val binding = DataBindingUtil.inflate<ItemEventBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.event_item,
+            R.layout.item_event,
             parent,
             false
         )
@@ -43,7 +43,7 @@ class EventsListAdapter @Inject constructor() : RecyclerView.Adapter<EventsListA
         this.itemClick = itemClick
     }
 
-    class EventsViewHolder(val binding: EventItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class EventsViewHolder(val binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setClickListener(callback: ((EventPreview) -> Unit)?){
             binding.viewModel?.onItemPressedCallback = {
                     eventPreview -> callback?.invoke(eventPreview)
