@@ -15,6 +15,7 @@ import gustavo.acontece.MainApplication
 import gustavo.acontece.R
 import gustavo.acontece.databinding.ActivityHomeBinding
 import gustavo.acontece.ui.eventdetail.EventDetailActivity
+import gustavo.acontece.utils.EventObserver
 import javax.inject.Inject
 
 class EventsActivity : AppCompatActivity() {
@@ -72,9 +73,9 @@ class EventsActivity : AppCompatActivity() {
                     binding.homeSwipeRefreshLayout.isRefreshing = it
                 }
             })
-            errorMessage.observe(this@EventsActivity, Observer {
+            errorMessage.observe(this@EventsActivity, EventObserver {
                 binding.homeFaceAnimation.repeatCount = LottieDrawable.INFINITE
-                if (it.isNullOrBlank()) {
+                if (it.isBlank()) {
                     hideNetworkingInfo()
                 } else if (!binding.homeFaceAnimation.isAnimating) {
                     showNetworkingInfo(it)
