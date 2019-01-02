@@ -35,7 +35,7 @@ object BindingAdapters {
             .load(imageUrl)
             .fit()
             .centerCrop()
-            .transform(CircleTransform())
+            .transform(CircleTransformation())
             .into(view)
     }
 }

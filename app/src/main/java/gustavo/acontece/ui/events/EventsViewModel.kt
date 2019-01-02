@@ -1,4 +1,4 @@
-package gustavo.acontece.ui.home
+package gustavo.acontece.ui.events
 
 import android.arch.lifecycle.MutableLiveData
 import gustavo.acontece.R
@@ -12,7 +12,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(val eventRepository: EventRepositoryImpl, val resourceProvider: ResourceProvider): BaseViewModel() {
+class EventsViewModel @Inject constructor(val eventRepository: EventRepositoryImpl, val resourceProvider: ResourceProvider): BaseViewModel() {
 
     val eventPreviewList = MutableLiveData<List<EventPreview>>()
     val loaderVisibility = MutableLiveData<Boolean>()

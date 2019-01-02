@@ -2,7 +2,7 @@ package gustavo.acontece.data.entity.model
 
 import java.util.*
 
-data class Event(
+data class EventDetail(
     val id: String,
     val title: String,
     val image: String,

@@ -1,4 +1,4 @@
-package gustavo.acontece.ui.home
+package gustavo.acontece.ui.events
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView

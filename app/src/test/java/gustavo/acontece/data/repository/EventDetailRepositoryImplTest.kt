@@ -13,7 +13,7 @@ import org.junit.Before
 import org.junit.Test
 import java.util.*
 
-class EventRepositoryImplTest {
+class EventDetailRepositoryImplTest {
 
     private lateinit var eventRepositoryImpl: EventRepositoryImpl
 
@@ -31,7 +31,7 @@ class EventRepositoryImplTest {
             25.54,
             "-123",
             "-456",
-            "Event description",
+            "EventDetail description",
             cuponsItemOutputList,
             peopleItemOutputList
         )
@@ -65,13 +65,13 @@ class EventRepositoryImplTest {
         val peopleList = listOf(People("10", "Kelvin", "url"))
         val location = Location(-123.00, -456.00, "title")
         val cuponList = listOf(Cupon("5", 2.14))
-        val expectedValue = Event(
+        val expectedValue = EventDetail(
             "1",
             "title",
             "",
             25.54,
             Calendar.getInstance().apply { timeInMillis = 1234 },
-            "Event description",
+            "EventDetail description",
             location,
             peopleList,
             cuponList

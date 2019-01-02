@@ -15,9 +15,9 @@ object EventMapper {
         }.toList()
     }
 
-    fun toEvent(output: EventOutput): Event {
+    fun toEvent(output: EventOutput): EventDetail {
         return with(output) {
-            Event(
+            EventDetail(
                 id,
                 title,
                 image,

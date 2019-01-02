@@ -1,4 +1,4 @@
-package gustavo.acontece.ui.home
+package gustavo.acontece.ui.events
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -17,7 +17,7 @@ import gustavo.acontece.databinding.ActivityHomeBinding
 import gustavo.acontece.ui.eventdetail.EventDetailActivity
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity() {
+class EventsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
 
@@ -37,16 +37,16 @@ class HomeActivity : AppCompatActivity() {
         viewModel.loadData()
     }
 
-    private fun provideViewModel(): HomeViewModel {
-        return ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+    private fun provideViewModel(): EventsViewModel {
+        return ViewModelProviders.of(this, viewModelFactory).get(EventsViewModel::class.java)
     }
 
-    private fun setupBinding(viewModel: HomeViewModel) {
+    private fun setupBinding(viewModel: EventsViewModel) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.viewModel = viewModel
         binding.homeSwipeRefreshLayout.apply {
             setOnRefreshListener { viewModel.loadData() }
-            setColorSchemeColors(ContextCompat.getColor(this@HomeActivity, R.color.secondaryColor))
+            setColorSchemeColors(ContextCompat.getColor(this@EventsActivity, R.color.secondaryColor))
         }
     }
 
@@ -55,24 +55,24 @@ class HomeActivity : AppCompatActivity() {
             startActivity(EventDetailActivity.newInstance(Intent(this, EventDetailActivity::class.java), it.id))
         }
         with(binding.homeRecyclerView) {
-            layoutManager = LinearLayoutManager(this@HomeActivity)
+            layoutManager = LinearLayoutManager(this@EventsActivity)
             adapter = listAdapter
         }
     }
 
-    private fun setupObservers(viewModel: HomeViewModel) {
+    private fun setupObservers(viewModel: EventsViewModel) {
         with(viewModel) {
-            eventPreviewList.observe(this@HomeActivity, Observer {
+            eventPreviewList.observe(this@EventsActivity, Observer {
                 it?.let {
                     listAdapter.setEventPreviewList(it)
                 }
             })
-            loaderVisibility.observe(this@HomeActivity, Observer {
+            loaderVisibility.observe(this@EventsActivity, Observer {
                 it?.let {
                     binding.homeSwipeRefreshLayout.isRefreshing = it
                 }
             })
-            errorMessage.observe(this@HomeActivity, Observer {
+            errorMessage.observe(this@EventsActivity, Observer {
                 binding.homeFaceAnimation.repeatCount = LottieDrawable.INFINITE
                 if (it.isNullOrBlank()) {
                     hideNetworkingInfo()

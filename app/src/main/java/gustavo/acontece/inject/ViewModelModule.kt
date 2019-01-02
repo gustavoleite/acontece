@@ -8,7 +8,7 @@ import dagger.multibindings.IntoMap
 import gustavo.acontece.ui.ViewModelFactory
 import gustavo.acontece.ui.ViewModelKey
 import gustavo.acontece.ui.eventdetail.EventDetailViewModel
-import gustavo.acontece.ui.home.HomeViewModel
+import gustavo.acontece.ui.events.EventsViewModel
 
 @Module
 abstract class ViewModelModule {
@@ -18,8 +18,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(HomeViewModel::class)
-    internal abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+    @ViewModelKey(EventsViewModel::class)
+    internal abstract fun bindHomeViewModel(viewModel: EventsViewModel): ViewModel
 
     @Binds
     @IntoMap
