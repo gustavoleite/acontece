@@ -29,8 +29,8 @@ data class EventOutput(
     val description: String,
 
     @SerializedName("cupons")
-    val cupons: List<CuponOutput>,
+    val cuponList: List<CuponOutput>,
 
     @SerializedName("people")
-    val people: List<PeopleOutput>
+    val peopleList: List<PeopleOutput>
 )

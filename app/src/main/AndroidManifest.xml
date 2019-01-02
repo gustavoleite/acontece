@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="gustavo.acontece">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:name=".MainApplication"
@@ -19,6 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".ui.eventdetail.EventDetailActivity"
+                android:theme="@style/AppTheme.NoActionBar"/>
+
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/GOOGLE_MAPS_KEY" />
+
     </application>
 
 </manifest>

@@ -22,11 +22,13 @@ android {
     buildTypes {
         debug {
             resValue "string", "API_BASE_URL", '"http://5b840ba5db24a100142dcd8c.mockapi.io/api/"'
+            resValue "string", "GOOGLE_MAPS_KEY", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "AIzaSyC1cp0hLZPUBd_kr2YsY2tBH4osl79IzaY")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             resValue "string", "API_BASE_URL", '"http://5b840ba5db24a100142dcd8c.mockapi.io/api/"'
+            resValue "string", "GOOGLE_MAPS_KEY", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "AIzaSyC1cp0hLZPUBd_kr2YsY2tBH4osl79IzaY")
         }
     }
 }
@@ -75,6 +77,9 @@ dependencies {
 
     //Lottie animations
     implementation 'com.airbnb.android:lottie:2.7.0'
+
+    //Maps
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
 
     //Test
     testImplementation 'junit:junit:4.12'
