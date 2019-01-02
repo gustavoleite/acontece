@@ -13,14 +13,14 @@ import android.view.View
 import com.airbnb.lottie.LottieDrawable
 import gustavo.acontece.MainApplication
 import gustavo.acontece.R
-import gustavo.acontece.databinding.ActivityHomeBinding
+import gustavo.acontece.databinding.ActivityEventsBinding
 import gustavo.acontece.ui.eventdetail.EventDetailActivity
 import gustavo.acontece.utils.EventObserver
 import javax.inject.Inject
 
 class EventsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityEventsBinding
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -43,7 +43,7 @@ class EventsActivity : AppCompatActivity() {
     }
 
     private fun setupBinding(viewModel: EventsViewModel) {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_events)
         binding.viewModel = viewModel
         binding.homeSwipeRefreshLayout.apply {
             setOnRefreshListener { viewModel.loadData() }
