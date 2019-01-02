@@ -11,7 +11,6 @@ import gustavo.acontece.utils.resource.ResourceProviderImpl
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.verify
 import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
@@ -35,7 +34,6 @@ class EventsViewModelTest : BaseTest() {
     lateinit var mockList: Observer<List<EventPreview>>
 
     @MockK
-    @RelaxedMockK
     lateinit var mockError: EventObserver<String>
 
     @Rule
@@ -52,7 +50,6 @@ class EventsViewModelTest : BaseTest() {
         MockKAnnotations.init(this, relaxUnitFun = true)
         viewModel = EventsViewModel(repository, ResourceProviderImpl(ApplicationProvider.getApplicationContext()))
     }
-
 
     @Test
     fun `when load data with success must set event preview list`() {
