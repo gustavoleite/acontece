@@ -18,7 +18,8 @@ class EventDetailViewModel  @Inject constructor(val eventRepository: EventReposi
     val event = MutableLiveData<EventDetail>()
     val image = ObservableField<String>()
     val description = ObservableField<String>()
-    val peopleSectionTitle = resourceProvider.getString(R.string.events_detail_organizers)
+    val peopleSection = resourceProvider.getString(R.string.events_detail_organizers)
+    val locationSection = resourceProvider.getString(R.string.events_detail_location)
 
     fun loadData(eventId: String) {
         eventRepository
