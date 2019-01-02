@@ -31,6 +31,7 @@ android {
             resValue "string", "GOOGLE_MAPS_KEY", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "AIzaSyC1cp0hLZPUBd_kr2YsY2tBH4osl79IzaY")
         }
     }
+    testOptions.unitTests.includeAndroidResources true
 }
 
 ext {
@@ -84,6 +85,9 @@ dependencies {
     //Test
     testImplementation 'junit:junit:4.12'
     testImplementation 'io.mockk:mockk:1.8.13.kotlin13'
+    testImplementation "org.robolectric:robolectric:4.1"
+    testImplementation 'androidx.test:core:1.1.0'
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

@@ -5,7 +5,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="gustavo.acontece.ui.eventdetail.PeopleViewModel"/>
+                type="gustavo.acontece.ui.eventdetail.PeopleListViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

@@ -4,7 +4,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="gustavo.acontece.ui.home.HomeViewModel"/>
+                type="gustavo.acontece.ui.events.EventsViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -13,7 +13,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.home.HomeActivity">
+            tools:context=".ui.events.EventsActivity">
 
         <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/home_swipe_refresh_layout"

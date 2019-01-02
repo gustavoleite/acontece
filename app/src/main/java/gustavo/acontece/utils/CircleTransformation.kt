@@ -6,7 +6,7 @@ package gustavo.acontece.utils
 import android.graphics.*
 import com.squareup.picasso.Transformation
 
-class CircleTransform : Transformation {
+class CircleTransformation : Transformation {
 
     private var x: Int = 0
     private var y: Int = 0

@@ -1,4 +1,4 @@
-package gustavo.acontece.ui.home
+package gustavo.acontece.ui.events
 
 import gustavo.acontece.data.entity.model.EventPreview
 import org.hamcrest.CoreMatchers.`is`

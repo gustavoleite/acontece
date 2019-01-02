@@ -9,13 +9,13 @@ import gustavo.acontece.data.entity.model.People
 import gustavo.acontece.databinding.ItemPeopleBinding
 import javax.inject.Inject
 
-class PeopleAdapter @Inject constructor() : RecyclerView.Adapter<PeopleAdapter.PeopleViewHolder>() {
+class PeopleListAdapter @Inject constructor() : RecyclerView.Adapter<PeopleListAdapter.PeopleViewHolder>() {
 
     private var people: List<People> = emptyList()
 
     override fun onBindViewHolder(holder: PeopleViewHolder, position: Int) {
         val binding = holder.binding
-        val viewModel = PeopleViewModel(people[position])
+        val viewModel = PeopleListViewModel(people[position])
         binding.viewModel = viewModel
     }
 

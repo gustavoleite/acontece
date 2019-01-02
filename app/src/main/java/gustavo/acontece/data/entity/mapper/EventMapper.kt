@@ -15,9 +15,9 @@ object EventMapper {
         }.toList()
     }
 
-    fun toEvent(output: EventOutput): Event {
+    fun toEvent(output: EventOutput): EventDetail {
         return with(output) {
-            Event(
+            EventDetail(
                 id,
                 title,
                 image,
@@ -46,7 +46,7 @@ object EventMapper {
     private fun toCuponList(cuponOutputList: List<CuponOutput>) : List<Cupon> {
         return cuponOutputList.map {
             with(it) {
-                Cupon(id, discount.toDouble())
+                Cupon(id, discount)
             }
         }.toList()
     }

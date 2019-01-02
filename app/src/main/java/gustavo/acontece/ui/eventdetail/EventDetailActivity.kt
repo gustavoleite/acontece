@@ -29,7 +29,7 @@ class EventDetailActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var listAdapter: PeopleAdapter
+    lateinit var listListAdapter: PeopleListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ class EventDetailActivity : AppCompatActivity() {
     private fun setupAdapter() {
         with(binding.eventDetailRecyclerView) {
             layoutManager = LinearLayoutManager(this@EventDetailActivity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = listAdapter
+            adapter = listListAdapter
         }
     }
 
@@ -64,7 +64,7 @@ class EventDetailActivity : AppCompatActivity() {
             event.observe(this@EventDetailActivity, Observer {
                 it?.let { it ->
                     binding.toolbar.title = it.title
-                    listAdapter.setPeopleList(it.people)
+                    listListAdapter.setPeopleList(it.people)
                     setMapLocation(it.location)
                 }
             })
