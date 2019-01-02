@@ -21,7 +21,6 @@ import gustavo.acontece.utils.SupportMapFragmentWrapper
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import javax.inject.Inject
 
-
 class EventDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEventDetailBinding
@@ -65,7 +64,7 @@ class EventDetailActivity : AppCompatActivity() {
             event.observe(this@EventDetailActivity, Observer {
                 it?.let { it ->
                     binding.toolbar.title = it.title
-                    listAdapter.setPeopleList(it.peoples)
+                    listAdapter.setPeopleList(it.people)
                     setMapLocation(it.location)
                 }
             })

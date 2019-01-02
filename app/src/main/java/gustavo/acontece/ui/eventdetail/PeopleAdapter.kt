@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import gustavo.acontece.R
-import gustavo.acontece.data.entity.model.EventPreview
 import gustavo.acontece.data.entity.model.People
 import gustavo.acontece.databinding.ItemPeopleBinding
 import javax.inject.Inject
@@ -38,9 +37,5 @@ class PeopleAdapter @Inject constructor() : RecyclerView.Adapter<PeopleAdapter.P
         notifyDataSetChanged()
     }
 
-    class PeopleViewHolder(val binding: ItemPeopleBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun setClickListener(callback: ((EventPreview) -> Unit)?){
-
-        }
-    }
+    class PeopleViewHolder(val binding: ItemPeopleBinding) : RecyclerView.ViewHolder(binding.root)
 }

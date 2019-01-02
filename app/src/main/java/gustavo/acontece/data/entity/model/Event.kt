@@ -10,6 +10,6 @@ data class Event(
     val date: Calendar,
     val description: String,
     val location: Location,
-    val peoples: List<People>,
+    val people: List<People>,
     val cupons: List<Cupon>
 )
