@@ -1,7 +1,7 @@
 package gustavo.acontece.data.repository
 
 import gustavo.acontece.data.api.EventApi
-import gustavo.acontece.data.entity.model.EventPreview
+import gustavo.acontece.data.entity.model.*
 import gustavo.acontece.data.entity.output.CuponOutput
 import gustavo.acontece.data.entity.output.EventOutput
 import gustavo.acontece.data.entity.output.PeopleOutput
@@ -20,8 +20,8 @@ class EventRepositoryImplTest {
     @MockK
     private lateinit var eventApi: EventApi
 
-    private val cuponsItemOutputList = listOf(CuponOutput("1", 10, "1"))
-    private val peopleItemOutputList = listOf(PeopleOutput("1", "Kelvin", "1", ""))
+    private val cuponsItemOutputList = listOf(CuponOutput("1", 2.14, "5"))
+    private val peopleItemOutputList = listOf(PeopleOutput("1", "Kelvin", "10", "url"))
     private val eventOutputList = listOf(
         EventOutput(
             "1",
@@ -44,7 +44,7 @@ class EventRepositoryImplTest {
     }
 
     @Test
-    fun `fetch events`() {
+    fun `fetch events test`() {
         every {
             eventApi.getAllEvents()
         } returns Single.just(
@@ -53,5 +53,29 @@ class EventRepositoryImplTest {
         val expectedValue =
             listOf(EventPreview("1", "title", "", 25.54, Calendar.getInstance().apply { timeInMillis = 1234 }))
         eventRepositoryImpl.fetchEvents().test().assertValue(expectedValue)
+    }
+
+    @Test
+    fun `fetch event detail test`() {
+        every {
+            eventApi.getEvent("1")
+        } returns Single.just(
+            eventOutputList.first()
+        )
+        val peopleList = listOf(People("10", "Kelvin", "url"))
+        val location = Location(-123.00, -456.00, "title")
+        val cuponList = listOf(Cupon("5", 2.14))
+        val expectedValue = Event(
+            "1",
+            "title",
+            "",
+            25.54,
+            Calendar.getInstance().apply { timeInMillis = 1234 },
+            "Event description",
+            location,
+            peopleList,
+            cuponList
+        )
+        eventRepositoryImpl.fetchEventDetail("1").test().assertValue(expectedValue)
     }
 }

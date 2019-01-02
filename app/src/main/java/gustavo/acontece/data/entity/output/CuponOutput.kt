@@ -8,7 +8,7 @@ data class CuponOutput(
     val eventId: String,
 
     @SerializedName("discount")
-    val discount: Int,
+    val discount: Double,
 
     @SerializedName("id")
     val id: String
