@@ -33,7 +33,7 @@ class CheckinActivity : AppCompatActivity() {
     }
 
     private fun setupBinding(viewModel: CheckinViewModel) {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_events)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_checkin)
         binding.viewModel = viewModel
     }
 

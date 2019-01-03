@@ -19,6 +19,8 @@ import gustavo.acontece.R
 import gustavo.acontece.data.entity.model.EventDetail
 import gustavo.acontece.data.entity.model.Location
 import gustavo.acontece.databinding.ActivityEventDetailBinding
+import gustavo.acontece.ui.checkin.CheckinActivity
+import gustavo.acontece.utils.EventObserver
 import gustavo.acontece.utils.SupportMapFragmentWrapper
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import javax.inject.Inject
@@ -66,6 +68,16 @@ class EventDetailActivity : AppCompatActivity() {
             event.observe(this@EventDetailActivity, Observer {
                 it?.let { eventDetail ->
                     bindData(eventDetail)
+                }
+            })
+            navigation.observe(this@EventDetailActivity, EventObserver {
+                if (it) {
+                    startActivity(
+                        CheckinActivity.newInstance(
+                            Intent(this@EventDetailActivity, CheckinActivity::class.java),
+                            viewModel.event.value?.id ?: throw Exception()
+                        )
+                    )
                 }
             })
         }

@@ -6,6 +6,7 @@ import gustavo.acontece.R
 import gustavo.acontece.data.entity.model.EventDetail
 import gustavo.acontece.data.repository.EventRepositoryImpl
 import gustavo.acontece.ui.base.BaseViewModel
+import gustavo.acontece.utils.Event
 import gustavo.acontece.utils.extensions.toBrCurrency
 import gustavo.acontece.utils.extensions.toDayMonthYear
 import gustavo.acontece.utils.resource.ResourceProvider
@@ -20,6 +21,7 @@ class EventDetailViewModel @Inject constructor(
     resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
+    val navigation = MutableLiveData<Event<Boolean>>()
     val event = MutableLiveData<EventDetail>()
     val image = ObservableField<String>()
     val description = ObservableField<String>()
@@ -41,6 +43,10 @@ class EventDetailViewModel @Inject constructor(
                 }
             )
             .addTo(compositeDisposable)
+    }
+
+    fun onCheckinPressed() {
+        navigation.value = Event(true)
     }
 
     private fun setData(it: EventDetail?) {
