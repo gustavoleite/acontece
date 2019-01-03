@@ -37,8 +37,8 @@ class EventsViewModelTest : BaseTest() {
     val testRule = SynchronousTestSchedulerRule()
 
     val eventPreviewList = listOf(
-        EventPreview("1", "title", "", 25.54, Calendar.getInstance().apply { timeInMillis = 1234 }),
         EventPreview("2", "title", "", 73.09, Calendar.getInstance().apply { timeInMillis = 456 }),
+        EventPreview("1", "title", "", 25.54, Calendar.getInstance().apply { timeInMillis = 1234 }),
         EventPreview("3", "title", "", 42.05, Calendar.getInstance().apply { timeInMillis = 789 })
     )
 
