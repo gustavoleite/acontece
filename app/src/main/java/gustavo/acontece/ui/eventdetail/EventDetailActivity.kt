@@ -8,6 +8,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import gustavo.acontece.MainApplication
 import gustavo.acontece.R
+import gustavo.acontece.data.entity.model.EventDetail
 import gustavo.acontece.data.entity.model.Location
 import gustavo.acontece.databinding.ActivityEventDetailBinding
 import gustavo.acontece.utils.SupportMapFragmentWrapper
@@ -62,12 +64,22 @@ class EventDetailActivity : AppCompatActivity() {
     private fun setupObservers(viewModel: EventDetailViewModel) {
         with(viewModel) {
             event.observe(this@EventDetailActivity, Observer {
-                it?.let { it ->
-                    binding.toolbar.title = it.title
-                    listListAdapter.setPeopleList(it.people)
-                    setMapLocation(it.location)
+                it?.let { eventDetail ->
+                    bindData(eventDetail)
                 }
             })
+        }
+    }
+
+    private fun bindData(eventDetail: EventDetail) {
+        with(eventDetail) {
+            binding.toolbar.title = title
+            listListAdapter.setPeopleList(people)
+            setMapLocation(location)
+            if (eventDetail.people.isEmpty()) {
+                binding.eventDetailRecyclerView.visibility = View.GONE
+                binding.eventDetailPeopleSection.visibility = View.GONE
+            }
         }
     }
 
