@@ -6,7 +6,6 @@ import gustavo.acontece.BaseTest
 import gustavo.acontece.SynchronousTestSchedulerRule
 import gustavo.acontece.data.entity.model.EventPreview
 import gustavo.acontece.data.repository.EventRepositoryImpl
-import gustavo.acontece.utils.EventObserver
 import gustavo.acontece.utils.resource.ResourceProviderImpl
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -33,15 +32,19 @@ class EventsViewModelTest : BaseTest() {
     @MockK
     lateinit var mockList: Observer<List<EventPreview>>
 
-    @MockK
-    lateinit var mockError: EventObserver<String>
-
     @Rule
     @JvmField
     val testRule = SynchronousTestSchedulerRule()
 
     val eventPreviewList = listOf(
         EventPreview("1", "title", "", 25.54, Calendar.getInstance().apply { timeInMillis = 1234 }),
+        EventPreview("2", "title", "", 73.09, Calendar.getInstance().apply { timeInMillis = 456 }),
+        EventPreview("3", "title", "", 42.05, Calendar.getInstance().apply { timeInMillis = 789 })
+    )
+
+    val eventPreviewListSorted = listOf(
+        EventPreview("1", "title", "", 25.54, Calendar.getInstance().apply { timeInMillis = 1234 }),
+        EventPreview("3", "title", "", 42.05, Calendar.getInstance().apply { timeInMillis = 789 }),
         EventPreview("2", "title", "", 73.09, Calendar.getInstance().apply { timeInMillis = 456 })
     )
 
@@ -72,4 +75,11 @@ class EventsViewModelTest : BaseTest() {
         viewModel.loadData()
         assertThat(viewModel.errorMessage.value?.peekContent(), `is`("Ops, algo deu errado!"))
     }
-}
+
+    @Test
+    fun `must sort event preview list by price`() {
+        viewModel.eventPreviewList.value = eventPreviewList
+        viewModel.sortEventPreviewListByPrice()
+        assertThat(viewModel.eventPreviewList.value, `is`(eventPreviewListSorted))
+    }
+ }

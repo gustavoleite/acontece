@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.airbnb.lottie.LottieDrawable
 import gustavo.acontece.MainApplication
@@ -17,6 +19,7 @@ import gustavo.acontece.databinding.ActivityEventsBinding
 import gustavo.acontece.ui.eventdetail.EventDetailActivity
 import gustavo.acontece.utils.EventObserver
 import javax.inject.Inject
+
 
 class EventsActivity : AppCompatActivity() {
 
@@ -28,13 +31,15 @@ class EventsActivity : AppCompatActivity() {
     @Inject
     lateinit var listAdapter: EventsListAdapter
 
+    lateinit var viewModel: EventsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainApplication.appComponent.inject(this)
-        val viewModel = provideViewModel()
-        setupBinding(viewModel)
+        viewModel = provideViewModel()
+        setupBinding()
         setupAdapter()
-        setupObservers(viewModel)
+        setupObservers()
         viewModel.loadData()
     }
 
@@ -42,7 +47,7 @@ class EventsActivity : AppCompatActivity() {
         return ViewModelProviders.of(this, viewModelFactory).get(EventsViewModel::class.java)
     }
 
-    private fun setupBinding(viewModel: EventsViewModel) {
+    private fun setupBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_events)
         binding.viewModel = viewModel
         binding.homeSwipeRefreshLayout.apply {
@@ -61,7 +66,7 @@ class EventsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupObservers(viewModel: EventsViewModel) {
+    private fun setupObservers() {
         with(viewModel) {
             eventPreviewList.observe(this@EventsActivity, Observer {
                 it?.let {
@@ -82,6 +87,20 @@ class EventsActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu_events, menu)
+        val drawable = ContextCompat.getDrawable(applicationContext, R.drawable.filter)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_item_price) {
+            viewModel.sortEventPreviewListByPrice()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showNetworkingInfo(it: String?) {

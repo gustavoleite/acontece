@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="gustavo.guterres.leite.pontedoguaiba.features.about.AboutActivity">
+    <item
+            android:id="@+id/menu_item_price"
+            android:title="@string/menu_events_price"
+            app:showAsAction="never" />
+</menu>

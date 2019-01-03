@@ -41,4 +41,8 @@ class EventsViewModel @Inject constructor(
             )
             .addTo(compositeDisposable)
     }
+
+    fun sortEventPreviewListByPrice() {
+        eventPreviewList.value = eventPreviewList.value?.sortedBy { it.price }
+    }
 }

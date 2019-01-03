@@ -5,4 +5,6 @@
     <string name="events_detail_organizers">ORGANIZADORES:</string>
     <string name="events_detail_location">LOCALIZAÇÃO:</string>
     <string name="events_detail_cupom">CUPOM DE DESCONTO:</string>
+    <string name="menu_events_price">Preço</string>
+    <string name="menu_events_date">Data</string>
 </resources>
