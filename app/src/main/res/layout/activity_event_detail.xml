@@ -58,6 +58,32 @@
                     android:layout_height="wrap_content">
 
                 <TextView
+                        android:id="@+id/event_detail_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="16dp"
+                        android:text="@{viewModel.date}"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        tools:text="02/01/2019"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                        android:id="@+id/event_detail_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="@{viewModel.price}"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        tools:text="R$20,00"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
                         android:id="@+id/event_detail_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -65,9 +91,10 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="12dp"
                         android:text="@{viewModel.description}"
+                        android:textColor="@android:color/black"
                         android:textSize="16dp"
                         android:lineSpacingExtra="4dp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/event_detail_date"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         tools:text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription"/>
@@ -76,9 +103,9 @@
                         android:id="@+id/event_detail_people_section"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="40dp"
                         android:layout_marginStart="16dp"
-                        android:text="@{viewModel.peopleSectionTitle}"
+                        android:text="@{viewModel.peopleSection}"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         tools:text="ORGANIZADORES:"
@@ -88,16 +115,68 @@
                 <android.support.v7.widget.RecyclerView
                         android:id="@+id/event_detail_recycler_view"
                         android:layout_marginTop="16dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         app:layout_constraintTop_toBottomOf="@+id/event_detail_people_section"/>
+
+                <ImageView
+                        android:id="@+id/event_detail_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/tag"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/event_detail_cupon"/>
+
+                <TextView
+                        android:id="@+id/event_detail_price_section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginStart="16dp"
+                        android:text="@{viewModel.cuponSection}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="CUPOM DE DESCONTO:"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/event_detail_recycler_view"/>
+
+                <TextView
+                        android:id="@+id/event_detail_cupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@{viewModel.cupon}"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/secondaryColor"
+                        tools:text="R$49,50"
+                        app:layout_constraintStart_toEndOf="@+id/event_detail_tag"
+                        app:layout_constraintTop_toBottomOf="@+id/event_detail_price_section"/>
+
+                <TextView
+                        android:id="@+id/event_detail_location_section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="34dp"
+                        android:layout_marginStart="16dp"
+                        android:text="@{viewModel.locationSection}"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="LOCALIZAÇÃO:"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/event_detail_cupon"/>
 
                 <fragment
                         android:id="@+id/event_detail_map"
                         android:name="gustavo.acontece.utils.SupportMapFragmentWrapper"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
-                        app:layout_constraintTop_toBottomOf="@+id/event_detail_recycler_view"/>
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@+id/event_detail_location_section"/>
 
                 <View
                         android:layout_width="match_parent"
