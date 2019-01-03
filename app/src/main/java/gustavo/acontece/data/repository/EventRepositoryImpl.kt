@@ -20,4 +20,10 @@ class EventRepositoryImpl @Inject constructor(private val eventApi: EventApi) : 
             .getEvent(id)
             .map { EventMapper.toEvent(it) }
     }
+
+    override fun makeCheckin(eventId: String, name: String, email: String): Single<Boolean> {
+        return eventApi
+            .checkin(EventMapper.toCheckinInput(eventId, name, email))
+            .map { EventMapper.toBoolean(it) }
+    }
 }
