@@ -4,4 +4,5 @@
     <string name="events_list_error">Ops, algo deu errado!</string>
     <string name="events_detail_organizers">ORGANIZADORES:</string>
     <string name="events_detail_location">LOCALIZAÇÃO:</string>
+    <string name="events_detail_cupom">CUPOM DE DESCONTO:</string>
 </resources>
