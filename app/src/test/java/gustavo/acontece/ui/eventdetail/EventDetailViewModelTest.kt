@@ -72,7 +72,9 @@ class EventDetailViewModelTest : BaseTest() {
         viewModel.loadData("1")
         verify { mockResponse.onChanged(eventDetail) }
         assertThat(viewModel.description.get(), `is`("description"))
-        assertThat(viewModel.description.get(), `is`("description"))
+        assertThat(viewModel.cupon.get(), `is`("R$ 23,40"))
         assertThat(viewModel.image.get(), `is`("url"))
+        assertThat(viewModel.date.get(), `is`("31/12/1969"))
+        assertThat(viewModel.price.get(), `is`("R$ 25,54"))
     }
 }
