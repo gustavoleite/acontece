@@ -34,7 +34,7 @@ class CheckinViewModel @Inject constructor(
     fun onCheckinPressed() {
         requestStatus.value = Status.LOADING
         eventRepository
-            .makeCheckin(eventId, "gustavo", "")
+            .makeCheckin(eventId, name.get().orEmpty(), email.get().orEmpty())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

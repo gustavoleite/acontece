@@ -10,7 +10,7 @@
     <string name="menu_events_price">Preço</string>
     <string name="menu_events_date">Data</string>
 
-    <string name="checkin_name_title">Fazer checkin</string>
+    <string name="checkin_name_title">Fazer check-in</string>
     <string name="checkin_name_hint">Nome</string>
     <string name="checkin_email_hint">E-mail</string>
 </resources>
