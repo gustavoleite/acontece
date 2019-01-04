@@ -15,9 +15,6 @@ import gustavo.acontece.databinding.ActivityCheckinBinding
 import gustavo.acontece.utils.EventObserver
 import javax.inject.Inject
 
-
-
-
 class CheckinActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheckinBinding
