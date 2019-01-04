@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import gustavo.acontece.MainApplication
 import gustavo.acontece.R
 import gustavo.acontece.databinding.ActivityCheckinBinding
+import gustavo.acontece.utils.EventObserver
 import javax.inject.Inject
 
 
@@ -24,7 +25,7 @@ class CheckinActivity : AppCompatActivity() {
         MainApplication.appComponent.inject(this)
         val viewModel = provideViewModel()
         setupBinding(viewModel)
-        setupObservers()
+        setupObservers(viewModel)
         viewModel.eventId = (intent.extras?.getString(CheckinActivity.CHECKIN_ARG) ?: throw Exception())
     }
 
@@ -37,7 +38,12 @@ class CheckinActivity : AppCompatActivity() {
         binding.viewModel = viewModel
     }
 
-    private fun setupObservers() {
+    private fun setupObservers(viewModel: CheckinViewModel) {
+        viewModel.navigation.observe(this, EventObserver {
+            when (it) {
+                CheckinNavigation.CHECKIN -> finish()
+            }
+        })
     }
 
     companion object {
