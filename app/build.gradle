@@ -82,6 +82,9 @@ dependencies {
     //Maps
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
 
+    //Loading button
+    implementation 'br.com.simplepass:loading-button-android:1.6.5'
+
     //Test
     testImplementation 'junit:junit:4.12'
     testImplementation 'io.mockk:mockk:1.8.13.kotlin13'

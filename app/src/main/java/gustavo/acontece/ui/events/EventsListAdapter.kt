@@ -13,12 +13,14 @@ class EventsListAdapter @Inject constructor() : RecyclerView.Adapter<EventsListA
 
     private var events: List<EventPreview> = emptyList()
     private var itemClick: ((EventPreview) -> Unit)? = null
+    private var itemShare: ((String) -> Unit)? = null
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
         val binding = holder.binding
         val viewModel = EventsListViewModel(events[position])
         binding.viewModel = viewModel
-        holder.setClickListener(itemClick)
+        holder.setItemCallback(itemClick)
+        holder.setShareCallback(itemShare)
     }
 
     override fun getItemCount(): Int = events.size
@@ -39,14 +41,24 @@ class EventsListAdapter @Inject constructor() : RecyclerView.Adapter<EventsListA
         notifyDataSetChanged()
     }
 
-    fun setClickListener(itemClick: ((EventPreview) -> Unit)?) {
+    fun setItemCallback(itemClick: ((EventPreview) -> Unit)?) {
         this.itemClick = itemClick
     }
 
+    fun setShareCallback(itemShare: ((String) -> Unit)?) {
+        this.itemShare = itemShare
+    }
+
     class EventsViewHolder(val binding: ItemEventBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun setClickListener(callback: ((EventPreview) -> Unit)?){
-            binding.viewModel?.onItemPressedCallback = {
-                    eventPreview -> callback?.invoke(eventPreview)
+        fun setItemCallback(callback: ((EventPreview) -> Unit)?) {
+            binding.viewModel?.onItemPressedCallback = { eventPreview ->
+                callback?.invoke(eventPreview)
+            }
+        }
+
+        fun setShareCallback(callback: ((String) -> Unit)?) {
+            binding.viewModel?.onSharePressedCallback = { text ->
+                callback?.invoke(text)
             }
         }
     }

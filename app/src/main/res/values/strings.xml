@@ -2,9 +2,15 @@
     <string name="app_name">Acontece</string>
 
     <string name="events_list_error">Ops, algo deu errado!</string>
+
     <string name="events_detail_organizers">ORGANIZADORES:</string>
     <string name="events_detail_location">LOCALIZAÇÃO:</string>
     <string name="events_detail_cupom">CUPOM DE DESCONTO:</string>
+
     <string name="menu_events_price">Preço</string>
     <string name="menu_events_date">Data</string>
+
+    <string name="checkin_name_title">Fazer check-in</string>
+    <string name="checkin_name_hint">Nome</string>
+    <string name="checkin_email_hint">E-mail</string>
 </resources>

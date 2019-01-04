@@ -7,4 +7,5 @@ import io.reactivex.Single
 interface EventRepository {
     fun fetchEvents(): Single<List<EventPreview>>
     fun fetchEventDetail(id: String): Single<EventDetail>
+    fun makeCheckin(eventId: String, name: String, email: String) : Single<Boolean>
 }

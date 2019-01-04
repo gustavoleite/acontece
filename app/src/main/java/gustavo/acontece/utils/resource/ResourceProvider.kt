@@ -1,5 +1,7 @@
 package gustavo.acontece.utils.resource
 
+import android.support.annotation.StringRes
+
 interface ResourceProvider {
-    fun getString(resourceId: Int) : String
+    fun getString(@StringRes resourceId: Int, vararg formatArgs: Any?) : String
 }

@@ -22,6 +22,9 @@
         <activity
                 android:name=".ui.eventdetail.EventDetailActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+                android:name=".ui.checkin.CheckinActivity"
+                android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"

@@ -13,8 +13,13 @@ class EventsListViewModel(private val eventPreview: EventPreview) : ViewModel() 
     val date = eventPreview.date.toDayMonthYear()
 
     var onItemPressedCallback: ((EventPreview) -> Unit)? = null
+    var onSharePressedCallback: ((String) -> Unit)? = null
 
     fun onItemPressed() {
         onItemPressedCallback?.invoke(eventPreview)
+    }
+
+    fun onSharePressed() {
+        onSharePressedCallback?.invoke(title)
     }
 }
