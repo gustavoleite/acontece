@@ -86,6 +86,7 @@ class EventDetailActivity : AppCompatActivity() {
     private fun bindData(eventDetail: EventDetail) {
         with(eventDetail) {
             binding.toolbar.title = title
+            binding.eventDetailCheckin.show()
             listListAdapter.setPeopleList(people)
             setMapLocation(location)
             if (eventDetail.people.isEmpty()) {

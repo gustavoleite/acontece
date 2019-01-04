@@ -67,7 +67,7 @@ class CheckinActivity : AppCompatActivity() {
         )
         Handler().postDelayed({
             finish()
-        }, 1500)
+        }, 1000)
     }
 
     companion object {
