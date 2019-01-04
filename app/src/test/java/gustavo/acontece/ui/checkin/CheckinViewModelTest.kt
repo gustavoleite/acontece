@@ -3,8 +3,9 @@ package gustavo.acontece.ui.checkin
 import android.arch.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import gustavo.acontece.BaseTest
+import gustavo.acontece.SynchronousTestSchedulerRule
 import gustavo.acontece.data.repository.EventRepositoryImpl
-import gustavo.acontece.utils.Event
+import gustavo.acontece.utils.EventObserver
 import gustavo.acontece.utils.resource.ResourceProviderImpl
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -14,6 +15,7 @@ import io.reactivex.Single
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -27,14 +29,18 @@ class CheckinViewModelTest : BaseTest() {
     lateinit var repository: EventRepositoryImpl
 
     @MockK
-    lateinit var mockCloseNavigation: Observer<Event<Boolean>>
+    lateinit var observerCloseButton: EventObserver<Boolean>
 
     @MockK
-    lateinit var mockStatusRequest : Observer<Status>
+    lateinit var mockCheckinStatusRequest: Observer<CheckinStatus>
+
+    @Rule
+    @JvmField
+    val testRule = SynchronousTestSchedulerRule()
 
     @Before
     fun setup() {
-        MockKAnnotations.init(this)
+        MockKAnnotations.init(this, relaxUnitFun = true)
         viewModel = CheckinViewModel(repository, ResourceProviderImpl(ApplicationProvider.getApplicationContext()))
     }
 
@@ -47,21 +53,41 @@ class CheckinViewModelTest : BaseTest() {
 
     @Test
     fun `when close button pressed must trigger action`() {
-        viewModel.navigation.observe(mockLifecycleOwner(), mockCloseNavigation)
         viewModel.onClosePressed()
-        verify { mockCloseNavigation.onChanged(Event(true)) }
+        assertThat(viewModel.closeEvent.value?.peekContent(), `is`(true))
     }
 
     @Test
-    fun `when make checkin with success must trigger action`() {
+    fun `when make checkin with success must trigger complete status`() {
         every {
-            repository.makeCheckin(any(), any(), any())
+            repository.makeCheckin("1", "Ruan", "ruan@domain.com")
         } returns Single.just(
             true
         )
 
-        viewModel.requestStatus.observe(mockLifecycleOwner(), mockStatusRequest)
+        viewModel.eventId = "1"
+        viewModel.name.set("Ruan")
+        viewModel.email.set("ruan@domain.com")
+        viewModel.requestStatus.observe(mockLifecycleOwner(), mockCheckinStatusRequest)
         viewModel.onCheckinPressed()
-        verify { mockStatusRequest.onChanged(Status.COMPLETE) }
+        verify {
+            mockCheckinStatusRequest.onChanged(CheckinStatus.COMPLETE)
+        }
+    }
+
+    @Test
+    fun `when make checkin with error must trigger error status`() {
+        every {
+            repository.makeCheckin("1", "Ruan", "ruan@domain.com")
+        } returns Single.error(Exception(""))
+
+        viewModel.eventId = "1"
+        viewModel.name.set("Ruan")
+        viewModel.email.set("ruan@domain.com")
+        viewModel.requestStatus.observe(mockLifecycleOwner(), mockCheckinStatusRequest)
+        viewModel.onCheckinPressed()
+        verify {
+            mockCheckinStatusRequest.onChanged(CheckinStatus.ERROR)
+        }
     }
 }

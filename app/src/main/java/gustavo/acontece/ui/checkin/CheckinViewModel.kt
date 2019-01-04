@@ -18,8 +18,8 @@ class CheckinViewModel @Inject constructor(
     resourceProvider: ResourceProvider
 ) : BaseViewModel() {
 
-    val navigation = MutableLiveData<Event<Boolean>>()
-    val requestStatus = MutableLiveData<Status>()
+    val closeEvent = MutableLiveData<Event<Boolean>>()
+    val requestStatus = MutableLiveData<CheckinStatus>()
     val name = ObservableField<String>()
     val email = ObservableField<String>()
     val checkinTitle = resourceProvider.getString(R.string.checkin_name_title)
@@ -28,21 +28,21 @@ class CheckinViewModel @Inject constructor(
     lateinit var eventId: String
 
     fun onClosePressed() {
-        navigation.value = Event(true)
+        closeEvent.value = Event(true)
     }
 
     fun onCheckinPressed() {
-        requestStatus.value = Status.LOADING
+        requestStatus.value = CheckinStatus.LOADING
         eventRepository
             .makeCheckin(eventId, name.get().orEmpty(), email.get().orEmpty())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
-                    requestStatus.value = Status.COMPLETE
+                    requestStatus.value = CheckinStatus.COMPLETE
                 },
                 onError = {
-                    requestStatus.value = Status.ERROR
+                    requestStatus.value = CheckinStatus.ERROR
                 }
             )
             .addTo(compositeDisposable)

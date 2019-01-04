@@ -45,14 +45,14 @@ class CheckinActivity : AppCompatActivity() {
 
     private fun setupObservers(viewModel: CheckinViewModel) {
         with(viewModel) {
-            navigation.observe(this@CheckinActivity, EventObserver {
+            closeEvent.observe(this@CheckinActivity, EventObserver {
                 if (it) finish()
             })
             requestStatus.observe(this@CheckinActivity, Observer {
                 when (it) {
-                    Status.LOADING -> binding.checkinButton.startAnimation()
-                    Status.ERROR -> binding.checkinButton.revertAnimation()
-                    Status.COMPLETE -> doneAnimationAndFinishAcitivty()
+                    CheckinStatus.LOADING -> binding.checkinButton.startAnimation()
+                    CheckinStatus.ERROR -> binding.checkinButton.revertAnimation()
+                    CheckinStatus.COMPLETE -> doneAnimationAndFinishAcitivty()
                 }
             })
         }
