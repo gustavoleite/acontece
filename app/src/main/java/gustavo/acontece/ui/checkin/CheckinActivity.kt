@@ -1,16 +1,21 @@
 package gustavo.acontece.ui.checkin
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import gustavo.acontece.MainApplication
 import gustavo.acontece.R
 import gustavo.acontece.databinding.ActivityCheckinBinding
 import gustavo.acontece.utils.EventObserver
 import javax.inject.Inject
+
+
 
 
 class CheckinActivity : AppCompatActivity() {
@@ -39,11 +44,30 @@ class CheckinActivity : AppCompatActivity() {
     }
 
     private fun setupObservers(viewModel: CheckinViewModel) {
-        viewModel.navigation.observe(this, EventObserver {
-            when (it) {
-                CheckinNavigation.CHECKIN -> finish()
-            }
-        })
+        with(viewModel) {
+            navigation.observe(this@CheckinActivity, EventObserver {
+                if (it) finish()
+            })
+            requestStatus.observe(this@CheckinActivity, Observer {
+                when (it) {
+                    Status.LOADING -> binding.checkinButton.startAnimation()
+                    Status.ERROR -> binding.checkinButton.revertAnimation()
+                    Status.COMPLETE -> doneAnimationAndFinishAcitivty()
+                }
+            })
+        }
+    }
+
+    private fun doneAnimationAndFinishAcitivty() {
+        binding.checkinButton.doneLoadingAnimation(
+            R.color.primaryColor, BitmapFactory.decodeResource(
+                this@CheckinActivity.resources,
+                R.drawable.baseline_done_white_36
+            )
+        )
+        Handler().postDelayed({
+            finish()
+        }, 1500)
     }
 
     companion object {

@@ -18,6 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         debug {
@@ -81,6 +82,9 @@ dependencies {
 
     //Maps
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+
+    //Loading button
+    implementation 'br.com.simplepass:loading-button-android:1.6.5'
 
     //Test
     testImplementation 'junit:junit:4.12'
