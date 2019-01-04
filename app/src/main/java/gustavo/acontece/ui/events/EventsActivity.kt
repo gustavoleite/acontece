@@ -57,8 +57,16 @@ class EventsActivity : AppCompatActivity() {
     }
 
     private fun setupAdapter() {
-        listAdapter.setClickListener { it ->
+        listAdapter.setItemCallback {
             startActivity(EventDetailActivity.newInstance(Intent(this, EventDetailActivity::class.java), it.id))
+        }
+        listAdapter.setShareCallback {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, it)
+                type = "text/plain"
+            }
+            startActivity(sendIntent)
         }
         with(binding.homeRecyclerView) {
             layoutManager = LinearLayoutManager(this@EventsActivity)
@@ -92,7 +100,6 @@ class EventsActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu_events, menu)
-        val drawable = ContextCompat.getDrawable(applicationContext, R.drawable.filter)
         return true
     }
 
